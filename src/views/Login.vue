@@ -14,6 +14,7 @@
 					<el-input
 						placeholder="请输入手机号"
 						v-model="loginForm.mobile"
+                        prefix-icon="el-icon-phone"
 					></el-input>
 				</el-form-item>
 				<el-form-item prop="code">
@@ -76,7 +77,7 @@ export default {
 				mobile: [
 					{
 						required: true,
-						message: "手机号不能为空",
+                        message: "手机号不能为空",
 					},
 					{
 						//正则 \d代表0-9
@@ -121,7 +122,7 @@ export default {
 			//发送请求
 			//网关发送请求
 			this.$axios({
-				url: "http://localhost:3008/users/getCode",
+				url: "/users/getCode",
 				method: "post",
 			})
 				.then((result) => {
@@ -140,11 +141,14 @@ export default {
                 //isOk validate 的回调函数参数, true代表验证成功
 				if (isOk) {
 					this.$axios({
-						url: "http://localhost:3008/users/login",
+						url: "/users/login",
 						method: "post",
 						data: this.loginForm,
 					}).then((result) => {
-						console.log(result);
+                        // console.log(result);
+                        //接收到响应内容, 存储token 跳转页面
+                        window.localStorage.setItem('user-token', result.data.token);
+                        this.$router.push('/');
 					});
 				}
 			});

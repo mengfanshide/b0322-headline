@@ -31,7 +31,7 @@ export default {
 	},
 	created() {
 		//发送ajax请求
-		this.$axios.get("http://localhost:3000").then((result) => {
+		this.$axios.get("/").then((result) => {
 			console.log(result);
 			this.d = result.data;
 		});
