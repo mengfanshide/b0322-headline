@@ -63,7 +63,7 @@ export default {
       loginForm: {
         mobile: "13825875687",
         code: "1234",
-        check: true,
+        check: true
       },
       //包含表单验证规则
       loginRules: {
@@ -71,31 +71,31 @@ export default {
         mobile: [
           {
             required: true,
-            message: "手机号不能为空",
+            message: "手机号不能为空"
           },
           {
             //正则 \d代表0-9
             pattern: /^1[3456789]\d{9}$/,
-            message: "手机号格式不正确",
-          },
+            message: "手机号格式不正确"
+          }
         ],
         code: [
           {
             required: true,
-            message: "验证码不能为空",
+            message: "验证码不能为空"
           },
           {
             pattern: /^\d{4}$/,
-            message: "验证码必须是四位数字",
-          },
+            message: "验证码必须是四位数字"
+          }
         ],
         check: [
           {
             //验证函数
-            validator,
-          },
-        ],
-      },
+            validator
+          }
+        ]
+      }
     };
   },
   methods: {
@@ -117,7 +117,7 @@ export default {
       //网关发送请求
       this.$axios({
         url: "/users/getCode",
-        method: "post",
+        method: "post"
       })
         .then((result) => {
           console.log(result);
@@ -137,19 +137,40 @@ export default {
           this.$axios({
             url: "/users/login",
             method: "post",
-            data: this.loginForm,
+            data: this.loginForm
           }).then((result) => {
             // console.log(result);
             //接收到响应内容, 存储token 跳转页面
-            //
-            window.localStorage.setItem("user-token", result.token);
-            this.$router.push("/");
+            //options 请求并没有响应内容
+            if (result) {
+              window.localStorage.setItem("user-token", result.token);
+              this.$router.push("/");
+            }
           });
         }
       });
       // console.log(this.loginForm);
-    },
+    }
   },
+  created() {
+    this.$axios
+      .get("/users/authorization")
+      .then((result) => {
+        if (result.success) {
+          const h = this.$createElement;
+          this.$message({
+            message: h("p", null, [
+              h("span", null, "已授权"),
+              h("i", {style: "color: teal"}, "欢迎")
+            ])
+          });
+          this.$router.push("/");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 };
 </script>
 <style lang="less" scoped>

@@ -31,13 +31,13 @@
 export default {
   data() {
     return {
-      d: null,
+      d: null
     };
   },
   created() {
     //发送ajax请求
     this.$axios
-      .get("/")
+      .get("/home")
       .then((result) => {
         //axios 是异步的 promise处理
         console.log(result, "home-result");
@@ -48,7 +48,7 @@ export default {
         console.log(e.response);
         // console.log(data);
       });
-  },
+  }
 };
 </script>
 <style lang="less" scoped>
