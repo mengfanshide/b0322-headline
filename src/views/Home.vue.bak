@@ -5,6 +5,7 @@
       <el-header>
         <!-- Header content -->
         {{ userInfo.nickname }} 回来了
+        {{ userInfo.last_modified_time }}
       </el-header>
       <el-main>
         <!-- Main content -->
@@ -50,6 +51,7 @@ export default {
     //     console.log(e.response);
     //     // console.log(data);
     //   });
+
     this.userInfo = eventBus.$data.userInfo;
   }
 };

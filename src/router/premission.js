@@ -3,8 +3,13 @@ import router from './index'
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import eventBus from '../utils/eventBus.js';
-import {getUserInfo} from '../api/user.js';
+// import {getUserInfo} from '../api/user.js';
+import {getUserInfo} from 'api/user.js';
 import {Message} from 'element-ui'
+
+// import getPageTitle from '../utils/getPageTitle.js'
+//utils -> ../utils/的别名
+import getPageTitle from 'utils/getPageTitle.js';
 //进入所有路由之前
 // authorization 验证token
 // 1. 有token 
@@ -19,6 +24,8 @@ import {Message} from 'element-ui'
 const whiteList = ['/login'] //白名单, 存储没有token也能访问的页面
 router.beforeEach(async (to, from, next)=>{
     console.log(to.path);
+    console.log(to.meta);
+    document.title = getPageTitle(to.meta.title);
     // console.log(from);
     NProgress.start(); //开启进度条
     // next();
@@ -39,9 +46,9 @@ router.beforeEach(async (to, from, next)=>{
                     // 正常来说所有的请求应该独立出来当做api处理
                     // 可以写几个对token操作的公有方法
                     const token = window.localStorage.getItem('user-token');
-                    
                     const result = await getUserInfo(token);
                     eventBus.$data.userInfo = result.data[0];
+                    eventBus.$data.userInfo.last_modified_time =  new Date(eventBus.$data.userInfo.last_modified_time).toLocaleString()
                     console.log(eventBus.$data.userInfo);
 
                     next();

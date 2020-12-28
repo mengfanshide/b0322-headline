@@ -7,6 +7,8 @@ import router from '../router';
 //每次发送请求的时候都会给请求地址带上baseURL的值
 const port = 3333;
 axios.defaults.baseURL = 'http://localhost:' + port;
+//默认请求过期时间
+axios.defaults.timeout = 5000;
 //interceptors 拦截器
 axios.interceptors.request.use(
     function(config) {

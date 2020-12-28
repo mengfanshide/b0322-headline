@@ -2,7 +2,7 @@
   <div class="login">
     <el-card shadow="always" class="login-card">
       <div class="logo">
-        <img src="../assets/images/logo_index.png" alt="" />
+        <img src="../../assets/images/logo_index.png" alt="" />
       </div>
       <el-form
         style="margin-top: 20px"
@@ -161,7 +161,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .login {
-  background-image: url(../assets/images/login_bg.jpg);
+  background-image: url(../../assets/images/login_bg.jpg);
   height: 100vh;
   min-height: 400px;
   background-size: cover;
