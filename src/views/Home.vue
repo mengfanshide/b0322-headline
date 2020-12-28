@@ -4,6 +4,7 @@
     <el-container>
       <el-header>
         <!-- Header content -->
+        {{ userInfo.nickname }} 回来了
       </el-header>
       <el-main>
         <!-- Main content -->
@@ -27,27 +28,29 @@
 
 <script>
 // @ is an alias to /src
-
+import eventBus from "../utils/eventBus.js";
 export default {
   data() {
     return {
-      d: null
+      d: null,
+      userInfo: null
     };
   },
   created() {
     //发送ajax请求
-    this.$axios
-      .get("/home")
-      .then((result) => {
-        //axios 是异步的 promise处理
-        console.log(result, "home-result");
-        // this.d = result.data;
-      })
-      .catch((e) => {
-        console.log(e, "ee");
-        console.log(e.response);
-        // console.log(data);
-      });
+    // this.$axios
+    //   .get("/home")
+    //   .then((result) => {
+    //     //axios 是异步的 promise处理
+    //     console.log(result, "home-result");
+    //     // this.d = result.data;
+    //   })
+    //   .catch((e) => {
+    //     console.log(e, "ee");
+    //     console.log(e.response);
+    //     // console.log(data);
+    //   });
+    this.userInfo = eventBus.$data.userInfo;
   }
 };
 </script>

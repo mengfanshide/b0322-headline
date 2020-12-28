@@ -120,7 +120,11 @@ export default {
         method: "post"
       })
         .then((result) => {
-          console.log(result);
+          // console.log(result);
+          this.$message({
+            type: "info",
+            message: `验证码: ${result.verifyCode}`
+          });
         })
         .catch((error) => {
           console.log(error, "看不懂也加上啊");
@@ -152,25 +156,7 @@ export default {
       // console.log(this.loginForm);
     }
   },
-  created() {
-    this.$axios
-      .get("/users/authorization")
-      .then((result) => {
-        if (result.success) {
-          const h = this.$createElement;
-          this.$message({
-            message: h("p", null, [
-              h("span", null, "已授权"),
-              h("i", {style: "color: teal"}, "欢迎")
-            ])
-          });
-          this.$router.push("/");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
+  created() {}
 };
 </script>
 <style lang="less" scoped>

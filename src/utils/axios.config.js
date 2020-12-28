@@ -11,9 +11,16 @@ axios.defaults.baseURL = 'http://localhost:' + port;
 axios.interceptors.request.use(
     function(config) {
         // console.log(config);
+
         const token = window.localStorage.getItem('user-token');
         //通常token都会放在专有的头信息中 Authorization 自定义头信息 http 请求头
-        config.headers.Authorization = `Bearer ${token}`;
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        // else{
+        //     config.headers.Authorization = `Bearer ${token}`;
+        // }
+
         //必须return
         //cors 跨域请求, 处理复杂请求, 会发送两次请求, 一次用来和服务器确认是否允许请求
         return config;
