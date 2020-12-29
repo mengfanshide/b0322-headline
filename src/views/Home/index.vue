@@ -2,7 +2,7 @@
   <el-container>
     <el-aside width="200px" style="background-color: #323745">
       <!-- Aside content -->
-      左侧导航
+      <layout-sidebar></layout-sidebar>
     </el-aside>
     <el-container>
       <el-header height="54px" style="background-color: #10182d">
@@ -19,9 +19,11 @@
 </template>
 <script>
 import Header from "@/components/Home/layout-header.vue";
+import Sidebar from "@/components/Home/layout-sidebar.vue";
 export default {
   components: {
-    "layout-header": Header
+    "layout-header": Header,
+    "layout-sidebar": Sidebar
   }
 };
 </script>

@@ -23,8 +23,8 @@ import getPageTitle from 'utils/getPageTitle.js';
 // 2.2 重定向到login
 const whiteList = ['/login'] //白名单, 存储没有token也能访问的页面
 router.beforeEach(async (to, from, next)=>{
-    console.log(to.path);
-    console.log(to.meta);
+    // console.log(to.path);
+    // console.log(to.meta);
     document.title = getPageTitle(to.meta.title);
     // console.log(from);
     NProgress.start(); //开启进度条
@@ -49,7 +49,7 @@ router.beforeEach(async (to, from, next)=>{
                     const result = await getUserInfo(token);
                     eventBus.$data.userInfo = result.data[0];
                     eventBus.$data.userInfo.last_modified_time =  new Date(eventBus.$data.userInfo.last_modified_time).toLocaleString()
-                    console.log(eventBus.$data.userInfo);
+                    // console.log(eventBus.$data.userInfo);
 
                     next();
                 }catch(error){
