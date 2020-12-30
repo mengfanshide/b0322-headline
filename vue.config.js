@@ -1,6 +1,6 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-console.log(path.resolve(__dirname, '../src/utils/'));
+// console.log(path.resolve(__dirname, '../src/utils/'));
 module.exports = {
     lintOnSave: false,
     devServer:{
